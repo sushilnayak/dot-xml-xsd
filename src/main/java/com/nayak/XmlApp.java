@@ -4,17 +4,23 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Node;
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSSerializer;
+import org.xml.sax.InputSource;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.nayak.model.Row;
+import com.nayak.utilities.XmlUtility;
 
 public class XmlApp {
 	
@@ -112,29 +118,31 @@ public class XmlApp {
 
 		String unformattedXml = fromDotToXML(dotModelList);
 
-		System.out.println(unformattedXml);
+		System.out.println(XmlUtility.formatXML(unformattedXml));
 
 	}
+	
+	  public static String formatXML(String input)
+	    {
+	        try
+	        {
+	            final InputSource src = new InputSource(new StringReader(input));
+	            final Node document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(src).getDocumentElement();
+
+	            final DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
+	            final DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
+	            final LSSerializer writer = impl.createLSSerializer();
+
+	            writer.getDomConfig().setParameter("format-pretty-print", Boolean.TRUE);
+	            writer.getDomConfig().setParameter("xml-declaration", true);
+
+	            return writer.writeToString(document);
+	        } catch (Exception e)
+	        {
+	            e.printStackTrace();
+	            return input;
+	        }
+	    }
 }
 
-@Data
-@ToString
-@NoArgsConstructor
-class Row {
-	String dataType;
-	String dotData;
-	List<String> listDotData;
-	Integer count;
 
-	public Row(String dataType, String dotData) {
-		super();
-		this.dataType = dataType;
-		this.dotData = dotData;
-
-		this.listDotData = new ArrayList<>();
-		this.listDotData.addAll(Arrays.asList(this.dotData.split("\\.")));
-		this.count = this.listDotData.size();
-
-	}
-
-}
