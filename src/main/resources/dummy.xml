@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persons>
+   <team>**String**</team>
+   <group>**String**</group>
+   <person>
+      <firstname>**String**</firstname>
+      <lastname>**String**</lastname>
+      <age>**String**</age>
+      <gender>**String**</gender>
+      <height>**Integer**</height>
+      <weight>**Integer**</weight>
+   </person>
+   <person>
+      <firstname>**String**</firstname>
+      <lastname>**String**</lastname>
+      <age>**String**</age>
+      <gender>**String**</gender>
+      <height>**Integer**</height>
+      <weight>**Integer**</weight>
+   </person>
+</persons>
+
