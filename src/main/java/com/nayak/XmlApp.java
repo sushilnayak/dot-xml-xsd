@@ -63,11 +63,10 @@ public class XmlApp {
 					try {
 						while (Integer.parseInt(openTag.peek().split("\\|")[1]) >= j) {
 							log.debug("</" + openTag.peek().split("\\|")[0] + ">");
+							// TODO: Need to work on logic to prefix . dot notation which have number .. it's not possible for XML to have number starting tag
 							sb.append("</" + openTag.pop().split("\\|")[0].split("\\[")[0] + ">");
 						}
-						// if (Integer.parseInt(openTag.peek().split("\\|")[1]) >= j) {
-						// log.debug("</" + openTag.pop().split("\\|")[0] + ">");
-						// }
+
 					} catch (Exception e) {
 						// TODO: first row would have exception otherwise this is cool!
 					}
@@ -80,7 +79,7 @@ public class XmlApp {
 						log.debug("<" + s + ">");
 						sb.append("<" + s.split("\\[")[0] + ">");
 					}
-
+					
 					openTag.add(s.concat("|").concat(String.valueOf(j)));
 				}
 
