@@ -1,0 +1,15 @@
+String|persons.team
+String|persons.group
+String|persons.person[1].firstname
+String|persons.person[1].lastname
+String|persons.person[1].age
+String|persons.person[1].gender
+Integer|persons.person[1].height
+Integer|persons.person[1].weight
+Integer|persons.person[1].123-DDD
+String|persons.person[2].firstname
+String|persons.person[2].lastname
+String|persons.person[2].age
+String|persons.person[2].gender
+Integer|persons.person[2].height
+Integer|persons.person[2].weight
